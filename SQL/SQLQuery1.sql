@@ -1,3 +1,6 @@
+USE DB2_project;
+GO
+
 DROP TABLE IF EXISTS dbo.Points;
 DROP TABLE IF EXISTS dbo.Circles;
 DROP TABLE IF EXISTS dbo.Triangles;
