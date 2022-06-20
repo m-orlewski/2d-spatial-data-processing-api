@@ -80,7 +80,7 @@ public struct Point : INullable
     }
 
     [SqlMethod(OnNullCall = false)]
-    public static Point Parse(SqlString s)
+    public static Point Parse(SqlString s) // (0,0)
     {
         if (s.IsNull)
             return Null;
