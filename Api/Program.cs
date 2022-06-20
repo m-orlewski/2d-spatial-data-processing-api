@@ -29,6 +29,7 @@ namespace Api
             }
 
             Selector selector = new Selector(conn);
+            Inserter inserter = new Inserter(conn);
 
             int choice;
 
@@ -52,6 +53,7 @@ namespace Api
                         selector.showMenu();
                         break;
                     case 2:
+                        inserter.showMenu();
                         break;
                     default:
                         Console.WriteLine("Wybierz jedną z dostępnych opcji");
