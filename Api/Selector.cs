@@ -55,6 +55,8 @@ namespace Api
                     case 4:
                         selectQuadrangles();
                         break;
+                    case 5:
+                        return;
                     default:
                         Console.WriteLine("Wybierz jedną z dostępnych opcji");
                         continue;
