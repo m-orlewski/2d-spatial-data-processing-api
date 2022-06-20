@@ -10,13 +10,13 @@ using System.Text;
 [Microsoft.SqlServer.Server.SqlUserDefinedType(Format.Native)]
 public struct Point : INullable
 {
-    private bool is_Null;
+    private bool isNull;
     private double x;
     private double y;
 
     public bool IsNull
     {
-        get { return (is_Null); }
+        get { return (isNull); }
     }
 
     public static Point Null
@@ -24,7 +24,7 @@ public struct Point : INullable
         get
         {
             Point p = new Point();
-            p.is_Null = true;
+            p.isNull = true;
             return p;
         }
     }
@@ -101,5 +101,17 @@ public struct Point : INullable
             throw new ArgumentException("Invalid coordinates");
         }
         return p;
+    }
+
+    [SqlMethod(OnNullCall = false)]
+    public static double DistanceBetween(Point p1, Point p2)
+    {
+        return Math.Sqrt(Math.Pow(p1.X - p2.X, 2) + Math.Pow(p1.Y - p2.Y, 2));
+    }
+
+    [SqlMethod(OnNullCall = false)]
+    public double DistanceFrom(Point p)
+    {
+        return DistanceBetween(this, p);
     }
 }
