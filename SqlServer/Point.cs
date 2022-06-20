@@ -87,10 +87,10 @@ public struct Point : INullable
 
         Point p = new Point();
 
-        s.Value.Remove(0, 1);
-        s.Value.Remove(s.Value.Length - 1, 1);
+        s = s.Value.Remove(0, 1);
+        s = s.Value.Remove(s.Value.Length - 1, 1);
 
-        string[] xy = s.Value.Split(", ".ToCharArray());
+        string[] xy = s.Value.Split(",".ToCharArray());
         try
         {
             p.X = double.Parse(xy[0]);
