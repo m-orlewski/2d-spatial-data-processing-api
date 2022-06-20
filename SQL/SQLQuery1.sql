@@ -28,3 +28,16 @@ GO
 SELECT circle.ToString() AS "Okr¹g" FROM dbo.Circles;
 GO
 
+DROP TABLE dbo.Triangles;
+GO
+
+CREATE TABLE Triangles(triangle Triangle);
+GO
+
+INSERT INTO dbo.Triangles (triangle) VALUES (CONVERT(Triangle, '(0,0),(1,1),(2,2)'));
+INSERT INTO dbo.Triangles (triangle) VALUES (CONVERT(Triangle, '(3,3),(4,4),(2,2)'));
+GO
+
+SELECT triangle.ToString() AS "Trójk¹t" FROM dbo.Triangles;
+GO
+
