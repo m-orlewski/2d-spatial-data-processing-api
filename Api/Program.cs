@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace Api
 {
@@ -10,6 +11,25 @@ namespace Api
     {
         static void Main(string[] args)
         {
+            SqlConnection conn = null;
+            
+            try
+            {
+                string connString = "Persist Security Info=False;Trusted_Connection=True;database=DB2_project;server=(local)";
+                conn = new SqlConnection(connString);
+                conn.Open();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            Selector selector = new Selector(conn);
+
             int choice;
 
             while (true)
@@ -29,13 +49,9 @@ namespace Api
                 switch (choice)
                 {
                     case 1:
-                        Console.WriteLine("Opcja 1");
+                        selector.showMenu();
                         break;
                     case 2:
-                        Console.WriteLine("Opcja 2");
-                        break;
-                    case 3:
-                        Console.WriteLine("Opcja 3");
                         break;
                     default:
                         Console.WriteLine("Wybierz jedną z dostępnych opcji");
@@ -50,8 +66,8 @@ namespace Api
         static void showMenu()
         {
             Console.Clear();
-            Console.WriteLine("1. Opcja 1");
-            Console.WriteLine("2. Opcja 2");
+            Console.WriteLine("1. Wyświetl dane z bazy");
+            Console.WriteLine("2. Dodaj dane do bazy");
             Console.WriteLine("3. Opcja 3");
 
             Console.Write("Wybierz opcję: ");
