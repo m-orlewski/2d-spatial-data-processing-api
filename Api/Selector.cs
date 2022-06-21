@@ -67,18 +67,18 @@ namespace Api
             }
         }
 
-        private void selectPoints()
+        public void selectPoints()
         {
             try
             {
                 conn.Open();
 
-                SqlCommand cmd = new SqlCommand("SELECT point.ToString() AS \"Punkt\" FROM Points", conn);
+                SqlCommand cmd = new SqlCommand("SELECT id, point.ToString() AS \"Punkt\" FROM Points", conn);
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    Console.WriteLine(reader["Punkt"]);
+                    Console.WriteLine(reader["id"] + ": " + reader["Punkt"]);
                 }
             }
             catch (Exception ex)
@@ -91,18 +91,18 @@ namespace Api
             }
         }
 
-        private void selectCircles()
+        public void selectCircles()
         {
             try
             {
                 conn.Open();
 
-                SqlCommand cmd = new SqlCommand("SELECT circle.ToString() AS \"Okrąg\" FROM Circles", conn);
+                SqlCommand cmd = new SqlCommand("SELECT id, circle.ToString() AS \"Okrąg\" FROM Circles", conn);
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    Console.WriteLine(reader["Okrąg"]);
+                    Console.WriteLine(reader["id"] + ": " + reader["Okrąg"]);
                 }
             }
             catch (Exception ex)
@@ -115,18 +115,18 @@ namespace Api
             }
         }
 
-        private void selectTriangles()
+        public void selectTriangles()
         {
             try
             {
                 conn.Open();
 
-                SqlCommand cmd = new SqlCommand("SELECT triangle.ToString() AS \"Trójkąt\" FROM Triangles", conn);
+                SqlCommand cmd = new SqlCommand("SELECT id, triangle.ToString() AS \"Trójkąt\" FROM Triangles", conn);
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    Console.WriteLine(reader["Trójkąt"]);
+                    Console.WriteLine(reader["id"] + ": " + reader["Trójkąt"]);
                 }
             }
             catch (Exception ex)
@@ -139,18 +139,18 @@ namespace Api
             }
         }
 
-        private void selectQuadrangles()
+        public void selectQuadrangles()
         {
             try
             {
                 conn.Open();
 
-                SqlCommand cmd = new SqlCommand("SELECT quadrangle.ToString() AS \"Czworokąt\" FROM Quadrangles", conn);
+                SqlCommand cmd = new SqlCommand("SELECT id, quadrangle.ToString() AS \"Czworokąt\" FROM Quadrangles", conn);
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    Console.WriteLine(reader["Czworokąt"]);
+                    Console.WriteLine(reader["id"] + ": " + reader["Czworokąt"]);
                 }
             }
             catch (Exception ex)

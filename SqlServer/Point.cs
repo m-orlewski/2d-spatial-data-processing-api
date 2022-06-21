@@ -104,14 +104,8 @@ public struct Point : INullable
     }
 
     [SqlMethod(OnNullCall = false)]
-    public static double DistanceBetween(Point p1, Point p2)
-    {
-        return Math.Sqrt(Math.Pow(p1.X - p2.X, 2) + Math.Pow(p1.Y - p2.Y, 2));
-    }
-
-    [SqlMethod(OnNullCall = false)]
     public double DistanceFrom(Point p)
     {
-        return DistanceBetween(this, p);
+        return Math.Sqrt(Math.Pow(this.X - p.X, 2) + Math.Pow(this.Y - p.Y, 2));
     }
 }

@@ -30,6 +30,7 @@ namespace Api
 
             Selector selector = new Selector(conn);
             Inserter inserter = new Inserter(conn);
+            Calculator calculator = new Calculator(conn, selector);
 
             int choice;
 
@@ -55,6 +56,9 @@ namespace Api
                     case 2:
                         inserter.showMenu();
                         break;
+                    case 3:
+                        calculator.showMenu();
+                        break;
                     default:
                         Console.WriteLine("Wybierz jedną z dostępnych opcji");
                         continue;
@@ -70,7 +74,7 @@ namespace Api
             Console.Clear();
             Console.WriteLine("1. Wyświetl dane z bazy");
             Console.WriteLine("2. Dodaj dane do bazy");
-            Console.WriteLine("3. Opcja 3");
+            Console.WriteLine("3. Wykonaj operacje na danych");
 
             Console.Write("Wybierz opcję: ");
         }
