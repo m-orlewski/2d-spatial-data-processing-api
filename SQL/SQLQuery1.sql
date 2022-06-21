@@ -14,6 +14,7 @@ CREATE TABLE Quadrangles(id int IDENTITY(1,1) PRIMARY KEY, quadrangle Quadrangle
 GO
 
 INSERT INTO dbo.Points (point) VALUES (CONVERT(Point, '(0,0)'));
+INSERT INTO dbo.Points (point) VALUES (CONVERT(Point, '(0.5, 0.5)'));
 INSERT INTO dbo.Points (point) VALUES (CONVERT(Point, '(1,1)'));
 INSERT INTO dbo.Points (point) VALUES (CONVERT(Point, '(2,2)'));
 INSERT INTO dbo.Points (point) VALUES (CONVERT(Point, '(3,3)'));
@@ -35,7 +36,7 @@ INSERT INTO dbo.Quadrangles (quadrangle) VALUES (CONVERT(Quadrangle, '(0,0),(1,1
 GO
 
 
-SELECT id, point.ToString() AS "Punkt", point.X as "X", point.Y as "Y" FROM dbo.Points;
+SELECT id, point.ToString() AS "Punkt" FROM dbo.Points;
 GO
 
 SELECT id, circle.ToString() AS "Okr¹g" FROM dbo.Circles;
@@ -46,3 +47,15 @@ GO
 
 SELECT id, quadrangle.ToString() AS "Czworok¹t" FROM dbo.Quadrangles;
 GO
+
+DECLARE @circle Circle;
+SET @circle = (SELECT circle FROM dbo.Circles WHERE id = 1);
+SELECT point.ToString(), point.IsInsideCircle(@circle) FROM dbo.Points;
+
+DECLARE @triangle Triangle;
+SET @triangle = (SELECT triangle FROM dbo.Triangles WHERE id = 1);
+SELECT point.ToString(), point.IsInsideTriangle(@triangle) FROM dbo.Points;
+
+DECLARE @quadrangle Quadrangle;
+SET @quadrangle = (SELECT quadrangle FROM dbo.Quadrangles WHERE id = 1);
+SELECT point.ToString(), point.IsInsideQuadrangle(@quadrangle) FROM dbo.Points;

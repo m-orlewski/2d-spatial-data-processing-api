@@ -6,6 +6,7 @@ using Microsoft.SqlServer.Server;
 using System.Text;
 
 
+
 [Serializable]
 [Microsoft.SqlServer.Server.SqlUserDefinedType(Format.Native, ValidationMethodName = "ValidateTriangle")]
 public struct Triangle: INullable
@@ -115,6 +116,7 @@ public struct Triangle: INullable
         return false;
     }
 
+    [SqlMethod(OnNullCall = false)]
     public double getSurfaceArea()
     {
         return 0.5 * Math.Abs((p2.X - p1.X)*(p3.Y - p1.Y) - (p2.Y - p1.Y)*(p3.X - p1.X));

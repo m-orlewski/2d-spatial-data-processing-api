@@ -6,6 +6,7 @@ using Microsoft.SqlServer.Server;
 using System.Text;
 
 
+
 [Serializable]
 [Microsoft.SqlServer.Server.SqlUserDefinedType(Format.Native, ValidationMethodName = "ValidateQuadrangle")]
 public struct Quadrangle : INullable
@@ -132,6 +133,7 @@ public struct Quadrangle : INullable
         return false;
     }
 
+    [SqlMethod(OnNullCall = false)]
     public double getSurfaceArea()
     {
         Triangle t1 = new Triangle();

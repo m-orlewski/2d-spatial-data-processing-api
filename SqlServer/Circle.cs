@@ -108,6 +108,7 @@ public struct Circle: INullable
             return false;
     }
 
+    [SqlMethod(OnNullCall = false)]
     public double getSurfaceArea()
     {
         return Math.PI * r * r;

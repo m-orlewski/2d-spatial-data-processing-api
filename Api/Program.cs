@@ -12,7 +12,7 @@ namespace Api
         static void Main(string[] args)
         {
             SqlConnection conn = null;
-            
+
             try
             {
                 string connString = "Persist Security Info=False;Trusted_Connection=True;database=DB2_project;server=(local)";
