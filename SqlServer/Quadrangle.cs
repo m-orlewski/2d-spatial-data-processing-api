@@ -119,13 +119,13 @@ public struct Quadrangle : INullable
         return quadrangle;
     }
 
-    private bool ValidateQuadrangle()
+    public bool ValidateQuadrangle()
     {
         Triangle t1 = new Triangle();
         Triangle t2 = new Triangle();
 
         t1.P1 = p1; t1.P2 = p2; t1.P3 = p3;
-        t2.P1 = p2; t2.P2 = p3; t2.P3 = p4;
+        t2.P1 = p3; t2.P2 = p4; t2.P3 = p1;
 
         if (t1.ValidateTriangle() && t2.ValidateTriangle() && p1.DistanceFrom(p4) > 0)
             return true;
@@ -140,7 +140,7 @@ public struct Quadrangle : INullable
         Triangle t2 = new Triangle();
 
         t1.P1 = p1; t1.P2 = p2; t1.P3 = p3;
-        t2.P1 = p2; t2.P2 = p3; t2.P3 = p4;
+        t2.P1 = p3; t2.P2 = p4; t2.P3 = p1;
 
         return t1.getSurfaceArea() + t2.getSurfaceArea();
     }

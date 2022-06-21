@@ -100,7 +100,7 @@ public struct Circle: INullable
         return circle;
     }
 
-    private bool ValidateCircle()
+    public bool ValidateCircle()
     {
         if (r > 0)
             return true;

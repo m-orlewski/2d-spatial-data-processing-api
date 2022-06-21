@@ -75,7 +75,7 @@ public struct Point : INullable
             StringBuilder builder = new StringBuilder();
             builder.Append("(");
             builder.Append(x);
-            builder.Append(", ");
+            builder.Append("; ");
             builder.Append(y);
             builder.Append(")");
             return builder.ToString();
@@ -83,7 +83,7 @@ public struct Point : INullable
     }
 
     [SqlMethod(OnNullCall = false)]
-    public static Point Parse(SqlString s) // (0,0)
+    public static Point Parse(SqlString s) // (0; 0)
     {
         if (s.IsNull)
             return Null;
@@ -96,16 +96,17 @@ public struct Point : INullable
         s = s.Value.Remove(0, 1);
         s = s.Value.Remove(s.Value.Length - 1, 1);
 
-        string[] xy = s.Value.Split(",".ToCharArray());
+        string[] xy = s.Value.Split(";".ToCharArray());
         try
         {
-            p.X = double.Parse(xy[0], ci);
-            p.Y = double.Parse(xy[1], ci);
+            p.X = double.Parse(xy[0].Replace(',', '.'), ci);
+            p.Y = double.Parse(xy[1].Replace(',', '.'), ci);
         }
         catch
         {
-            throw new ArgumentException("Invalid coordinates");
+            throw new FormatException("Invalid coordinates");
         }
+
         return p;
     }
 
@@ -163,7 +164,7 @@ public struct Point : INullable
         Triangle t2 = new Triangle();
 
         t1.P1 = q.P1; t1.P2 = q.P2; t1.P3 = q.P3;
-        t2.P1 = q.P2; t2.P2 = q.P3; t2.P3 = q.P4;
+        t2.P1 = q.P3; t2.P2 = q.P4; t2.P3 = q.P1;
 
         if (IsInsideTriangle(t1) || IsInsideTriangle(t2))
             return true;

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{1
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SqlServer", "SqlServer\SqlServer.sqlproj", "{EEDFA57B-C25A-4C35-BBF2-6C61B71844C0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlServerTest", "Tests\SqlServerTest\SqlServerTest.csproj", "{5EBA0304-47FE-48D5-B296-4C2495449605}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{EEDFA57B-C25A-4C35-BBF2-6C61B71844C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EEDFA57B-C25A-4C35-BBF2-6C61B71844C0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EEDFA57B-C25A-4C35-BBF2-6C61B71844C0}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{5EBA0304-47FE-48D5-B296-4C2495449605}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EBA0304-47FE-48D5-B296-4C2495449605}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EBA0304-47FE-48D5-B296-4C2495449605}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EBA0304-47FE-48D5-B296-4C2495449605}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

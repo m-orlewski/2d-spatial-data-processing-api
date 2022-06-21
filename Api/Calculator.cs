@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SqlClient;
-using System.Data.SqlTypes;
 
 namespace Api
 {
@@ -30,6 +25,10 @@ namespace Api
                 Console.WriteLine("2. Oblicz pole okręgu");
                 Console.WriteLine("3. Oblicz pole trójkąta");
                 Console.WriteLine("4. Oblicz pole czworokątu");
+                Console.WriteLine("5. Sprawdź czy punkt jest wewnątrz okręgu");
+                Console.WriteLine("6. Sprawdź czy punkt jest wewnątrz trójkąta");
+                Console.WriteLine("7. Sprawdź czy punkt jest wewnątrz czworokąta");
+                Console.WriteLine("8. Powrót");
 
                 Console.Write("Wybierz opcję: ");
 
@@ -57,6 +56,17 @@ namespace Api
                     case 4:
                         calculateQuadrangleArea();
                         break;
+                    case 5:
+                        checkIfInsideCircle();
+                        break;
+                    case 6:
+                        checkIfInsideTriangle();
+                        break;
+                    case 7:
+                        checkIfInsideQuadrangle();
+                        break;
+                    case 8:
+                        return;
                     default:
                         Console.WriteLine("Wybierz jedną z dostępnych opcji");
                         continue;
@@ -172,6 +182,123 @@ namespace Api
                 Console.WriteLine("Pole " + id + " czworokąta wynosi " + area);
             }
             catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        private void checkIfInsideCircle()
+        {
+            try
+            {
+                Console.WriteLine("Punkty:");
+                selector.selectPoints();
+                Console.WriteLine("Wybierz punkt: ");
+                int pointId = Convert.ToInt32(Console.ReadLine());
+
+                Console.WriteLine("Okręgi:");
+                selector.selectCircles();
+                Console.WriteLine("Wybierz okrąg: ");
+                int circleId = Convert.ToInt32(Console.ReadLine());
+
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand("DECLARE @point Point;\n" +
+                                                "DECLARE @circle Circle;\n" +
+                                                "SET @point = (SELECT point FROM dbo.Points WHERE id = " + pointId + ");\n" +
+                                                "SET @circle = (SELECT circle FROM dbo.Circles WHERE id = " + circleId + ");\n" +
+                                                "SELECT @point.IsInsideCircle(@circle) AS \"Bool\";", conn);
+
+                bool isInside = (bool)cmd.ExecuteScalar();
+
+                if (isInside)
+                    Console.WriteLine("Punkt " + pointId + " jest wewnątrz okręgu " + circleId);
+                else
+                    Console.WriteLine("Punkt " + pointId + " nie jest wewnątrz okręgu " + circleId);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        private void checkIfInsideTriangle()
+        {
+            try
+            {
+                Console.WriteLine("Punkty:");
+                selector.selectPoints();
+                Console.WriteLine("Wybierz punkt: ");
+                int pointId = Convert.ToInt32(Console.ReadLine());
+
+                Console.WriteLine("Trójąty:");
+                selector.selectTriangles();
+                Console.WriteLine("Wybierz trójkąt: ");
+                int triangleId = Convert.ToInt32(Console.ReadLine());
+
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand("DECLARE @point Point;\n" +
+                                                "DECLARE @triangle Triangle;\n" +
+                                                "SET @point = (SELECT point FROM dbo.Points WHERE id = " + pointId + ");\n" +
+                                                "SET @triangle = (SELECT triangle FROM dbo.Triangles WHERE id = " + triangleId + ");\n" +
+                                                "SELECT @point.IsInsideTriangle(@triangle) AS \"Bool\";", conn);
+
+                bool isInside = (bool)cmd.ExecuteScalar();
+
+                if (isInside)
+                    Console.WriteLine("Punkt " + pointId + " jest wewnątrz trójkąta " + triangleId);
+                else
+                    Console.WriteLine("Punkt " + pointId + " nie jest wewnątrz trójkąta " + triangleId);
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        private void checkIfInsideQuadrangle()
+        {
+            try
+            {
+                Console.WriteLine("Punkty:");
+                selector.selectPoints();
+                Console.WriteLine("Wybierz punkt: ");
+                int pointId = Convert.ToInt32(Console.ReadLine());
+
+                Console.WriteLine("Czworokąt:");
+                selector.selectQuadrangles();
+                Console.WriteLine("Wybierz czworokąt: ");
+                int quadrangleId = Convert.ToInt32(Console.ReadLine());
+
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand("DECLARE @point Point;\n" +
+                                                "DECLARE @quadrangle Quadrangle;\n" +
+                                                "SET @point = (SELECT point FROM dbo.Points WHERE id = " + pointId + ");\n" +
+                                                "SET @quadrangle = (SELECT quadrangle FROM dbo.Quadrangles WHERE id = " + quadrangleId + ");\n" +
+                                                "SELECT @point.IsInsideQuadrangle(@quadrangle) AS \"Bool\";", conn);
+
+                bool isInside = (bool)cmd.ExecuteScalar();
+
+                if (isInside)
+                    Console.WriteLine("Punkt " + pointId + " jest wewnątrz czworokąta " + quadrangleId);
+                else
+                    Console.WriteLine("Punkt " + pointId + " nie jest wewnątrz czworokąta " + quadrangleId);
+            }
+            catch (SqlException ex)
             {
                 Console.WriteLine(ex);
             }

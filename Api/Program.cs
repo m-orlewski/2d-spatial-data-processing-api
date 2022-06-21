@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SqlClient;
 
 namespace Api
@@ -31,6 +27,7 @@ namespace Api
             Selector selector = new Selector(conn);
             Inserter inserter = new Inserter(conn);
             Calculator calculator = new Calculator(conn, selector);
+            Deleter deleter = new Deleter(conn, selector);
 
             int choice;
 
@@ -59,6 +56,9 @@ namespace Api
                     case 3:
                         calculator.showMenu();
                         break;
+                    case 4:
+                        deleter.showMenu();
+                        break;
                     default:
                         Console.WriteLine("Wybierz jedną z dostępnych opcji");
                         continue;
@@ -75,6 +75,7 @@ namespace Api
             Console.WriteLine("1. Wyświetl dane z bazy");
             Console.WriteLine("2. Dodaj dane do bazy");
             Console.WriteLine("3. Wykonaj operacje na danych");
+            Console.WriteLine("4. Usuń dane z bazy");
 
             Console.Write("Wybierz opcję: ");
         }
