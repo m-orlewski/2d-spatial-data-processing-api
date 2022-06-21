@@ -107,4 +107,9 @@ public struct Circle: INullable
         else
             return false;
     }
+
+    public double getSurfaceArea()
+    {
+        return Math.PI * r * r;
+    }
 }
