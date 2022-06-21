@@ -37,13 +37,7 @@ public struct Triangle: INullable
 
         set
         {
-            Point temp = p1;
             p1 = value;
-
-            if (!ValidateTriangle())
-            {
-                throw new ArgumentException("Invalid coordinates");
-            }
         }
     }
 
@@ -53,13 +47,7 @@ public struct Triangle: INullable
 
         set
         {
-            Point temp = p2;
             p2 = value;
-
-            if (!ValidateTriangle())
-            {
-                throw new ArgumentException("Invalid coordinates");
-            }
         }
     }
 
@@ -69,13 +57,7 @@ public struct Triangle: INullable
 
         set
         {
-            Point temp = p3;
             p3 = value;
-
-            if (!ValidateTriangle())
-            {
-                throw new ArgumentException("Invalid coordinates");
-            }
         }
     }
 
@@ -123,13 +105,18 @@ public struct Triangle: INullable
         return triangle;
     }
 
-    private bool ValidateTriangle()
+    public bool ValidateTriangle()
     {
-        if ((p1.X == p2.X && p1.Y == p2.Y) ||
-            (p1.X == p3.X && p1.Y == p3.Y) ||
-            (p2.X == p3.X && p2.Y == p3.Y))
-            return false;
+        if (p1.DistanceFrom(p2) + p1.DistanceFrom(p3) > p2.DistanceFrom(p3) &&
+            p1.DistanceFrom(p2) + p2.DistanceFrom(p3) > p1.DistanceFrom(p3) &&
+            p1.DistanceFrom(p3) + p2.DistanceFrom(p3) > p1.DistanceFrom(p2))
+            return true;
 
-        return true;
+        return false;
+    }
+
+    public double getSurfaceArea()
+    {
+        return 0.5 * Math.Abs((p2.X - p1.X)*(p3.Y - p1.Y) - (p2.Y - p1.Y)*(p3.X - p1.X));
     }
 }
