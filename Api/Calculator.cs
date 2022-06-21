@@ -27,6 +27,9 @@ namespace Api
             {
                 Console.Clear();
                 Console.WriteLine("1. Oblicz odległość między punktami");
+                Console.WriteLine("2. Oblicz pole okręgu");
+                Console.WriteLine("3. Oblicz pole trójkąta");
+                Console.WriteLine("4. Oblicz pole czworokątu");
 
                 Console.Write("Wybierz opcję: ");
 
@@ -44,6 +47,15 @@ namespace Api
                 {
                     case 1:
                         calculateDistanceBetweenPoints();
+                        break;
+                    case 2:
+                        calculateCircleArea();
+                        break;
+                    case 3:
+                        calculateTriangleArea();
+                        break;
+                    case 4:
+                        calculateQuadrangleArea();
                         break;
                     default:
                         Console.WriteLine("Wybierz jedną z dostępnych opcji");
@@ -86,7 +98,87 @@ namespace Api
             {
                 conn.Close();
             }
+        }
 
+        private void calculateCircleArea()
+        {
+            selector.selectCircles();
+
+            int id;
+            try
+            {
+                Console.WriteLine("Wybierz okrąg: ");
+                id = Convert.ToInt32(Console.ReadLine());
+
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand("SELECT circle.getSurfaceArea() AS \"Pole\" FROM Circles WHERE id = " + id +";", conn);
+
+                double area = (double)cmd.ExecuteScalar();
+                Console.WriteLine("Pole " + id + " okręgu wynosi " + area);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        private void calculateTriangleArea()
+        {
+            selector.selectTriangles();
+
+            int id;
+            try
+            {
+                Console.WriteLine("Wybierz trójkąt: ");
+                id = Convert.ToInt32(Console.ReadLine());
+
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand("SELECT triangle.getSurfaceArea() AS \"Pole\" FROM Triangles WHERE id = " + id + ";", conn);
+
+                double area = (double)cmd.ExecuteScalar();
+                Console.WriteLine("Pole " + id + " trójkąta wynosi " + area);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        private void calculateQuadrangleArea()
+        {
+            selector.selectQuadrangles();
+
+            int id;
+            try
+            {
+                Console.WriteLine("Wybierz czworokąt: ");
+                id = Convert.ToInt32(Console.ReadLine());
+
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand("SELECT quadrangle.getSurfaceArea() AS \"Pole\" FROM Quadrangles WHERE id = " + id + ";", conn);
+
+                double area = (double)cmd.ExecuteScalar();
+                Console.WriteLine("Pole " + id + " czworokąta wynosi " + area);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
     }
 }
