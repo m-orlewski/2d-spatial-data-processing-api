@@ -37,13 +37,7 @@ public struct Quadrangle : INullable
 
         set
         {
-            Point temp = p1;
             p1 = value;
-
-            if (!ValidateQuadrangle())
-            {
-                throw new ArgumentException("Invalid coordinates");
-            }
         }
     }
 
@@ -53,13 +47,7 @@ public struct Quadrangle : INullable
 
         set
         {
-            Point temp = p2;
             p2 = value;
-
-            if (!ValidateQuadrangle())
-            {
-                throw new ArgumentException("Invalid coordinates");
-            }
         }
     }
 
@@ -69,13 +57,7 @@ public struct Quadrangle : INullable
 
         set
         {
-            Point temp = p3;
             p3 = value;
-
-            if (!ValidateQuadrangle())
-            {
-                throw new ArgumentException("Invalid coordinates");
-            }
         }
     }
 
@@ -85,13 +67,7 @@ public struct Quadrangle : INullable
 
         set
         {
-            Point temp = p4;
             p4 = value;
-
-            if (!ValidateQuadrangle())
-            {
-                throw new ArgumentException("Invalid coordinates");
-            }
         }
     }
 
@@ -144,14 +120,26 @@ public struct Quadrangle : INullable
 
     private bool ValidateQuadrangle()
     {
-        if ((p1.X == p2.X && p1.Y == p2.Y) ||
-            (p1.X == p3.X && p1.Y == p3.Y) ||
-            (p1.X == p4.X && p1.Y == p4.Y) ||
-            (p2.X == p3.X && p2.Y == p3.Y) ||
-            (p2.X == p4.X && p2.Y == p4.Y) ||
-            (p3.X == p4.X && p3.Y == p4.Y))
-            return false;
+        Triangle t1 = new Triangle();
+        Triangle t2 = new Triangle();
 
-        return true;
+        t1.P1 = p1; t1.P2 = p2; t1.P3 = p3;
+        t2.P1 = p2; t2.P2 = p3; t2.P3 = p4;
+
+        if (t1.ValidateTriangle() && t2.ValidateTriangle() && p1.DistanceFrom(p4) > 0)
+            return true;
+
+        return false;
+    }
+
+    public double getSurfaceArea()
+    {
+        Triangle t1 = new Triangle();
+        Triangle t2 = new Triangle();
+
+        t1.P1 = p1; t1.P2 = p2; t1.P3 = p3;
+        t2.P1 = p2; t2.P2 = p3; t2.P3 = p4;
+
+        return t1.getSurfaceArea() + t2.getSurfaceArea();
     }
 }
