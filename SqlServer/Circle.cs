@@ -36,7 +36,7 @@ public struct Circle: INullable
         }
     }
 
-    // Getter i Setter pola x
+    // Getter i Setter pola r
     public double R
     {
         get { return r; }
@@ -53,6 +53,7 @@ public struct Circle: INullable
         }
     }
 
+    // Getter i Setter pola c
     public Point C
     {
         get { return c; }
