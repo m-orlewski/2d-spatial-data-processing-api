@@ -1,21 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Data.SqlClient;
 
 namespace Api
 {
+    /*
+     * Klasa Inserter dodająca dane do bazy 
+    */
     public class Inserter
     {
         SqlConnection conn = null;
 
+        // Konstruktor inicjalizujący połączenie z bazą
         public Inserter(SqlConnection c)
         {
             conn = c;
         }
 
+        // Metoda obsługująca główne menu api
         public void showMenu()
         {
             int choice;
@@ -67,6 +69,7 @@ namespace Api
             }
         }
 
+        // Metoda dodająca punkt do bazy
         private void addPoint()
         {
             Console.WriteLine("Podaj punkt w formacie (x,y):");
@@ -79,7 +82,7 @@ namespace Api
                 SqlCommand cmd = new SqlCommand("INSERT INTO dbo.Points (point) VALUES (CONVERT(Point, '" + input + "'))", conn);
                 cmd.ExecuteNonQuery();
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 Console.WriteLine(ex);
             }
@@ -89,6 +92,7 @@ namespace Api
             }
         }
 
+        // Metoda dodająca okrąg do bazy
         private void addCircle()
         {
             Console.WriteLine("Podaj środek okręgu w formacie (x,y):");
@@ -111,7 +115,7 @@ namespace Api
                 SqlCommand cmd = new SqlCommand("INSERT INTO dbo.Circles (circle) VALUES (CONVERT(Circle, '" + input + "'))", conn);
                 cmd.ExecuteNonQuery();
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 Console.WriteLine(ex);
             }
@@ -121,6 +125,7 @@ namespace Api
             }
         }
 
+        // Metoda dodająca trójkąt do bazy
         private void addTriangle()
         {
             Console.WriteLine("Podaj pierwszy wierzchołek trójkąta w formacie (x,y):");
@@ -146,7 +151,7 @@ namespace Api
                 SqlCommand cmd = new SqlCommand("INSERT INTO dbo.Triangles (triangle) VALUES (CONVERT(Triangle, '" + input + "'))", conn);
                 cmd.ExecuteNonQuery();
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 Console.WriteLine(ex);
             }
@@ -156,6 +161,7 @@ namespace Api
             }
         }
 
+        // Metoda dodająca czworokąt do bazy
         private void addQuadrangle()
         {
             Console.WriteLine("Podaj pierwszy wierzchołek czworokąta w formacie (x,y):");
@@ -185,7 +191,7 @@ namespace Api
                 SqlCommand cmd = new SqlCommand("INSERT INTO dbo.Quadrangles (quadrangle) VALUES (CONVERT(Quadrangle, '" + input + "'))", conn);
                 cmd.ExecuteNonQuery();
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 Console.WriteLine(ex);
             }
