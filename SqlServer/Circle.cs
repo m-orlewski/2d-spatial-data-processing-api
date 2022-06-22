@@ -1,11 +1,13 @@
 using System;
-using System.Data;
-using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using Microsoft.SqlServer.Server;
 using System.Text;
 
 
+/*
+UDT Circle reprezentuje okr¹g na przestrzeni dwuwymiarowej
+o œrodku w punkcie c i promieniu r
+*/
 [Serializable]
 [Microsoft.SqlServer.Server.SqlUserDefinedType(Format.Native, ValidationMethodName = "ValidateCircle")]
 public struct Circle: INullable
@@ -14,6 +16,7 @@ public struct Circle: INullable
     private Point c;
     private double r;
 
+    // Metoda IsNull zwraca true je¿eli obiekt jest null
     public bool IsNull
     {
         get
@@ -21,6 +24,8 @@ public struct Circle: INullable
             return isNull;
         }
     }
+
+    // Metoda Null zwraca obiekt o wartoœci null
     public static Circle Null
     {
         get
@@ -31,6 +36,7 @@ public struct Circle: INullable
         }
     }
 
+    // Getter i Setter pola x
     public double R
     {
         get { return r; }
@@ -64,6 +70,7 @@ public struct Circle: INullable
         }
     }
 
+    // Metoda konwertuj¹ca obiekt Circle do typu string
     public override string ToString()
     {
         if (isNull)
@@ -76,8 +83,9 @@ public struct Circle: INullable
         builder.Append(r);
         return builder.ToString();
     }
-    
-    public static Circle Parse(SqlString s) // c=(0, 0) r=1
+
+    // Metoda parsuj¹ca SqlString do typu Circle
+    public static Circle Parse(SqlString s) // c=(0; 0) r=1
     {
         if (s.IsNull)
             return Null;
@@ -100,6 +108,7 @@ public struct Circle: INullable
         return circle;
     }
 
+    // Metoda sprawdzaj¹ca czy obiekt jest poprawny
     public bool ValidateCircle()
     {
         if (r > 0)
@@ -108,6 +117,7 @@ public struct Circle: INullable
             return false;
     }
 
+    // Metoda zwracaj¹ca pole okrêgu
     [SqlMethod(OnNullCall = false)]
     public double getSurfaceArea()
     {
