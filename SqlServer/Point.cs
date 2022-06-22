@@ -1,13 +1,12 @@
 using System;
-using System.Data;
-using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using Microsoft.SqlServer.Server;
 using System.Text;
 using System.Globalization;
-using System.Threading;
 
-
+/*
+UDT Point reprezentuje punkt na przestrzeni dwuwymiarowej
+*/
 [Serializable]
 [Microsoft.SqlServer.Server.SqlUserDefinedType(Format.Native)]
 public struct Point : INullable
@@ -16,12 +15,13 @@ public struct Point : INullable
     private double x;
     private double y;
 
-
+    // Metoda IsNull zwraca true je¿eli obiekt jest null
     public bool IsNull
     {
         get { return (isNull); }
     }
 
+    // Metoda Null zwraca obiekt o wartoœci null
     public static Point Null
     {
         get
@@ -32,6 +32,7 @@ public struct Point : INullable
         }
     }
 
+    // Getter i Setter pola x
     public double X
     {
         get { return x; }
@@ -49,6 +50,7 @@ public struct Point : INullable
         }
     }
 
+    // Getter i Setter pola y
     public double Y
     {
         get { return y; }
@@ -66,6 +68,7 @@ public struct Point : INullable
         }
     }
 
+    // Metoda konwertuj¹ca obiekt Point do typu string
     public override string ToString()
     {
         if (IsNull)
@@ -82,6 +85,7 @@ public struct Point : INullable
         }
     }
 
+    // Metoda parsuj¹ca SqlString do typu Point
     [SqlMethod(OnNullCall = false)]
     public static Point Parse(SqlString s) // (0; 0)
     {
@@ -110,12 +114,14 @@ public struct Point : INullable
         return p;
     }
 
+    // Metoda zwracaj¹ca odlêg³oœæ miêdzy punktami this i p
     [SqlMethod(OnNullCall = false)]
     public double DistanceFrom(Point p)
     {
         return Math.Sqrt(Math.Pow(this.X - p.X, 2) + Math.Pow(this.Y - p.Y, 2));
     }
 
+    // Metoda zwracaj¹ca true je¿eli punkt le¿y wewn¹trz okrêgu c
     public bool IsInsideCircle(Circle c)
     {
         if (IsNull || c.IsNull)
@@ -127,6 +133,7 @@ public struct Point : INullable
             return false;
     }
 
+    // Metoda zwracaj¹ca true je¿eli punkt le¿y wewn¹trz trójk¹ta t
     public bool IsInsideTriangle(Triangle t)
     {
         if (IsNull || t.IsNull)
@@ -155,6 +162,7 @@ public struct Point : INullable
             return false;
     }
 
+    // Metoda zwracaj¹ca true je¿eli punkt le¿y wewn¹trz czworok¹ta q
     public bool IsInsideQuadrangle(Quadrangle q)
     {
         if (IsNull || q.IsNull)
