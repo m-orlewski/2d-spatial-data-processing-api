@@ -1,10 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SqlServerTest
 {
+    /*
+     * Klasa CircleTest testująca metody z UDT Circle
+    */
     [TestClass]
     public class CircleTest
     {
@@ -17,12 +18,14 @@ namespace SqlServerTest
             c.R = 2;
         }
 
+        // Test metody Circle.ToString()
         [TestMethod]
         public void TestToString()
         {
             Assert.AreEqual("c=(0; 0) r=2", c.ToString());
         }
 
+        // Test metody Circle.Parse()
         [TestMethod]
         public void TestParse()
         {
@@ -32,6 +35,7 @@ namespace SqlServerTest
             Assert.AreEqual(c, c2);
         }
 
+        // Test metody Circle.GetSurfaceArea()
         [TestMethod]
         public void TestGetSurfaceArea()
         {
@@ -39,6 +43,7 @@ namespace SqlServerTest
             Assert.AreEqual(expectedArea, c.getSurfaceArea());
         }
 
+        // Test metody Circle.ValidateCircle()
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestValidateCircle()
