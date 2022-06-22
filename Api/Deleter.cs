@@ -1,23 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SqlClient;
 
 namespace Api
 {
+    /*
+     * Klasa Deleter usuwająca dane z bazy
+    */
     public class Deleter
     {
         private SqlConnection conn = null;
         Selector selector = null;
 
+        // Konstruktor inicjalizujący połącznie z bazą
         public Deleter(SqlConnection c, Selector s)
         {
             conn = c;
             selector = s;
         }
 
+        // Metoda obsługująca główne menu api
         public void showMenu()
         {
             int choice;
@@ -69,6 +70,7 @@ namespace Api
             }
         }
 
+        // Metoda usuwająca wybrany punkt z bazy
         public void deletePoint()
         {
             try
@@ -84,7 +86,7 @@ namespace Api
 
                 Console.WriteLine("Usunięto punkt " + id);
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -94,6 +96,7 @@ namespace Api
             }
         }
 
+        // Metoda usuwająca wybrany okrąg z bazy
         public void deleteCircle()
         {
             try
@@ -109,7 +112,7 @@ namespace Api
 
                 Console.WriteLine("Usunięto okrąg " + id);
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -119,6 +122,7 @@ namespace Api
             }
         }
 
+        // Metoda usuwająca wybrany trójkąt z bazy
         public void deleteTriangle()
         {
             try
@@ -134,7 +138,7 @@ namespace Api
 
                 Console.WriteLine("Usunięto trójkąt " + id);
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -144,6 +148,7 @@ namespace Api
             }
         }
 
+        // Metoda usuwająca wybrany czworokąt z bazy
         public void deleteQuadrangle()
         {
             try
@@ -159,7 +164,7 @@ namespace Api
 
                 Console.WriteLine("Usunięto czworokąt " + id);
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 Console.WriteLine(ex.Message);
             }
