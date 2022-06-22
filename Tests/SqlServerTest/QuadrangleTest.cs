@@ -1,10 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SqlServerTest
 {
+    /*
+     * Klasa QuadrangleTest testująca metody z UDT Quadrangle
+    */
     [TestClass]
     public class QuadrangleTest
     {
@@ -18,12 +18,14 @@ namespace SqlServerTest
             q.P4 = Point.Parse("(0; 1)");
         }
 
+        // Test metody Quadrangle.ToString()
         [TestMethod]
         public void TestToString()
         {
             Assert.AreEqual("(0; 0),(1; 0),(1; 1),(0; 1)", q.ToString());
         }
 
+        // Test metody Quadrangle.Parse()
         [TestMethod]
         public void TestParse()
         {
@@ -33,6 +35,7 @@ namespace SqlServerTest
             Assert.AreEqual(q, q2);
         }
 
+        // Test metody Quadrangle.GetSurfaceArea()
         [TestMethod]
         public void TestGetSurfaceArea()
         {
@@ -40,6 +43,7 @@ namespace SqlServerTest
             Assert.AreEqual(expectedArea, q.getSurfaceArea());
         }
 
+        // Test metody Quadrangle.ValidateQuadrangle()
         [TestMethod]
         public void TestValidateQuadrangle()
         {
