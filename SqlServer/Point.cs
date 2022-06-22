@@ -6,6 +6,7 @@ using System.Globalization;
 
 /*
 UDT Point reprezentuje punkt na przestrzeni dwuwymiarowej
+o wspó³rzêdnych x i y
 */
 [Serializable]
 [Microsoft.SqlServer.Server.SqlUserDefinedType(Format.Native)]
