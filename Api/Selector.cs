@@ -1,21 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SqlClient;
 
 namespace Api
 {
+    /*
+     * Klasa Selector odpowiada za wyświetlanie danych z bazy
+    */
     public class Selector
     {
         private SqlConnection conn = null;
 
+        // Konstruktor inicjalizujący połączenie z bazą
         public Selector(SqlConnection c)
         {
             conn = c;
         }
 
+        // Metoda obsługująca główne menu api
         public void showMenu()
         {
             int choice;
@@ -67,6 +68,7 @@ namespace Api
             }
         }
 
+        // Metoda wyświetlająca punkty z bazy danych
         public void selectPoints()
         {
             try
@@ -81,7 +83,7 @@ namespace Api
                     Console.WriteLine(reader["id"] + ": " + reader["Punkt"]);
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -91,6 +93,7 @@ namespace Api
             }
         }
 
+        // Metoda wyświetlająca okręgi z bazy danych
         public void selectCircles()
         {
             try
@@ -105,7 +108,7 @@ namespace Api
                     Console.WriteLine(reader["id"] + ": " + reader["Okrąg"]);
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -115,6 +118,7 @@ namespace Api
             }
         }
 
+        // Metoda wyświetlająca trójkąty z bazy danych
         public void selectTriangles()
         {
             try
@@ -129,7 +133,7 @@ namespace Api
                     Console.WriteLine(reader["id"] + ": " + reader["Trójkąt"]);
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -139,6 +143,7 @@ namespace Api
             }
         }
 
+        // Metoda wyświetlająca czworokąty z bazy danych
         public void selectQuadrangles()
         {
             try
@@ -153,7 +158,7 @@ namespace Api
                     Console.WriteLine(reader["id"] + ": " + reader["Czworokąt"]);
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 Console.WriteLine(ex.Message);
             }
