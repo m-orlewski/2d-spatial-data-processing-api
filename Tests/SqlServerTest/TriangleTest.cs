@@ -1,15 +1,16 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SqlServerTest
 {
+    /*
+     * Klasa TriangleTest testująca metody z UDT Triangle
+    */
     [TestClass]
     public class TriangleTest
     {
 
         Triangle t;
+
         public TriangleTest()
         {
             t = new Triangle();
@@ -18,12 +19,14 @@ namespace SqlServerTest
             t.P3 = Point.Parse("(0; 1)");
         }
 
+        // Test metody Triangle.ToString()
         [TestMethod]
         public void TestToString()
         {
             Assert.AreEqual("(0; 0),(1; 0),(0; 1)", t.ToString());
         }
 
+        // Test metody Triangle.Parse()
         [TestMethod]
         public void TestParse()
         {
@@ -33,6 +36,7 @@ namespace SqlServerTest
             Assert.AreEqual(t, t2);
         }
 
+        // Test metody Triangle.GetSurfaceArea()
         [TestMethod]
         public void TestGetSurfaceArea()
         {
@@ -40,6 +44,7 @@ namespace SqlServerTest
             Assert.AreEqual(expectedArea, t.getSurfaceArea());
         }
 
+        // Test metody Triangle.ValidateTriangle()
         [TestMethod]
         public void TestValidateTriangle()
         {
