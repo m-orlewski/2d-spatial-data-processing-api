@@ -1,12 +1,13 @@
 using System;
-using System.Data;
-using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using Microsoft.SqlServer.Server;
 using System.Text;
 
 
-
+/*
+UDT Triangle reprezentuje trójk¹t na przestrzeni dwuwymiarowej
+o wierzcho³kach p1, p2, p3
+*/
 [Serializable]
 [Microsoft.SqlServer.Server.SqlUserDefinedType(Format.Native, ValidationMethodName = "ValidateTriangle")]
 public struct Triangle: INullable
@@ -14,6 +15,7 @@ public struct Triangle: INullable
     private bool isNull;
     private Point p1, p2, p3;
 
+    // Metoda IsNull zwraca true je¿eli obiekt jest null
     public bool IsNull
     {
         get
@@ -21,7 +23,8 @@ public struct Triangle: INullable
             return isNull;
         }
     }
-    
+
+    // Metoda Null zwraca obiekt o wartoœci null
     public static Triangle Null
     {
         get
@@ -32,6 +35,7 @@ public struct Triangle: INullable
         }
     }
 
+    // Getter i Setter pola p1
     public Point P1
     {
         get { return p1; }
@@ -42,6 +46,7 @@ public struct Triangle: INullable
         }
     }
 
+    // Getter i Setter pola p2
     public Point P2
     {
         get { return p2; }
@@ -52,6 +57,7 @@ public struct Triangle: INullable
         }
     }
 
+    // Getter i Setter pola p3
     public Point P3
     {
         get { return p3; }
@@ -62,6 +68,7 @@ public struct Triangle: INullable
         }
     }
 
+    // Metoda konwertuj¹ca obiekt Triangle do typu string
     public override string ToString()
     {
         if (isNull)
@@ -77,7 +84,8 @@ public struct Triangle: INullable
         return builder.ToString();
     }
 
-    public static Triangle Parse(SqlString s) // (0,0),(1,1),(2,2)
+    // Metoda parsuj¹ca SqlString do typu Triangle
+    public static Triangle Parse(SqlString s) // (0; 0),(1; 1),(2; 2)
     {
         if (s.IsNull)
             return Null;
@@ -106,6 +114,7 @@ public struct Triangle: INullable
         return triangle;
     }
 
+    // Metoda sprawdzaj¹ca czy obiekt jest poprawny
     public bool ValidateTriangle()
     {
         if (p1.DistanceFrom(p2) + p1.DistanceFrom(p3) > p2.DistanceFrom(p3) &&
@@ -116,6 +125,7 @@ public struct Triangle: INullable
         return false;
     }
 
+    // Metoda zwracaj¹ca pole trójk¹ta
     [SqlMethod(OnNullCall = false)]
     public double getSurfaceArea()
     {
