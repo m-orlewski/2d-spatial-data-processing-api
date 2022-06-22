@@ -9,9 +9,10 @@ namespace Api
         {
             SqlConnection conn = null;
 
+            // test połączenia
             try
             {
-                string connString = "Persist Security Info=False;Trusted_Connection=True;database=DB2_project;server=(local)";
+                string connString = "Persist Security Info=False;Trusted_Connection=True;database=DB2_project;server=(local)"; // wymaga zmian do uruchomienia lokalnego
                 conn = new SqlConnection(connString);
                 conn.Open();
             }
@@ -31,7 +32,7 @@ namespace Api
 
             int choice;
 
-            while (true)
+            while (true) // główna pętla
             {
                 showMenu();
 
@@ -69,6 +70,7 @@ namespace Api
             }
         }
 
+        // Metoda wyświetlająca główne menu
         static void showMenu()
         {
             Console.Clear();
