@@ -3,6 +3,9 @@ using System;
 
 namespace SqlServerTest
 {
+    /*
+     * Klasa PointTest testująca metody z UDT Point
+    */
     [TestClass]
     public class PointTest
     {
@@ -15,12 +18,14 @@ namespace SqlServerTest
             p.Y = 2;
         }
 
+        // Test metody Point.ToString()
         [TestMethod]
         public void TestToString()
         {
             Assert.AreEqual("(1,5; 2)", p.ToString());
         }
 
+        // Test metody Point.Parse()
         [TestMethod]
         [ExpectedException(typeof(FormatException))]
         public void TestParse()
@@ -36,6 +41,7 @@ namespace SqlServerTest
             Assert.AreEqual("Invalid coordinates", ex.Message);
         }
 
+        // Test metody Point.DistanceFrom
         [TestMethod]
         public void TestDistanceFrom()
         {
@@ -47,6 +53,7 @@ namespace SqlServerTest
             Assert.AreEqual(0.5, p.DistanceFrom(p2));
         }
 
+        // Test metody Point.IsInsideCircle()
         [TestMethod]
         public void TestIsInsideCircle()
         {
@@ -67,6 +74,7 @@ namespace SqlServerTest
             Assert.IsFalse(p.IsInsideCircle(c));
         }
 
+        // Test metody Point.IsInsideTriangle()
         [TestMethod]
         public void TestIsInsideTriangle()
         {
@@ -89,6 +97,7 @@ namespace SqlServerTest
             Assert.IsFalse(p.IsInsideTriangle(t));
         }
 
+        // Test metody Point.IsInsideQuadrangle()
         [TestMethod]
         public void TestIsInsideQuadrangle()
         {
