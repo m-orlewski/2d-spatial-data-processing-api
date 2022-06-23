@@ -72,7 +72,7 @@ namespace Api
         // Metoda dodająca punkt do bazy
         private void addPoint()
         {
-            Console.WriteLine("Podaj punkt w formacie (x,y):");
+            Console.WriteLine("Podaj punkt w formacie (x;y):");
             string input = Console.ReadLine();
 
             try
@@ -95,7 +95,7 @@ namespace Api
         // Metoda dodająca okrąg do bazy
         private void addCircle()
         {
-            Console.WriteLine("Podaj środek okręgu w formacie (x,y):");
+            Console.WriteLine("Podaj środek okręgu w formacie (x;y):");
             string input1 = Console.ReadLine();
             Console.WriteLine("Podaj promień okręgu:");
             string input2 = Console.ReadLine();
@@ -128,11 +128,11 @@ namespace Api
         // Metoda dodająca trójkąt do bazy
         private void addTriangle()
         {
-            Console.WriteLine("Podaj pierwszy wierzchołek trójkąta w formacie (x,y):");
+            Console.WriteLine("Podaj pierwszy wierzchołek trójkąta w formacie (x;y):");
             string input1 = Console.ReadLine();
-            Console.WriteLine("Podaj drugiy wierzchołek trójkąta w formacie (x,y):");
+            Console.WriteLine("Podaj drugiy wierzchołek trójkąta w formacie (x;y):");
             string input2 = Console.ReadLine();
-            Console.WriteLine("Podaj trzeci wierzchołek trójkąta w formacie (x,y):");
+            Console.WriteLine("Podaj trzeci wierzchołek trójkąta w formacie (x;y):");
             string input3 = Console.ReadLine();
 
             StringBuilder builder = new StringBuilder();
@@ -164,13 +164,13 @@ namespace Api
         // Metoda dodająca czworokąt do bazy
         private void addQuadrangle()
         {
-            Console.WriteLine("Podaj pierwszy wierzchołek czworokąta w formacie (x,y):");
+            Console.WriteLine("Podaj pierwszy wierzchołek czworokąta w formacie (x;y):");
             string input1 = Console.ReadLine();
-            Console.WriteLine("Podaj drugiy wierzchołek czworokąta w formacie (x,y):");
+            Console.WriteLine("Podaj drugiy wierzchołek czworokąta w formacie (x;y):");
             string input2 = Console.ReadLine();
-            Console.WriteLine("Podaj trzeci wierzchołek czworokąta w formacie (x,y):");
+            Console.WriteLine("Podaj trzeci wierzchołek czworokąta w formacie (x;y):");
             string input3 = Console.ReadLine();
-            Console.WriteLine("Podaj czwarty wierzchołek czworokąta w formacie (x,y):");
+            Console.WriteLine("Podaj czwarty wierzchołek czworokąta w formacie (x;y):");
             string input4 = Console.ReadLine();
 
             StringBuilder builder = new StringBuilder();
